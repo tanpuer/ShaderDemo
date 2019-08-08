@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+>
+
+    <RelativeLayout
+            android:id="@+id/top_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.8"
+    >
+        <Button
+                android:id="@+id/close_btn"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="17dp"
+                android:background="@drawable/dynamic_cropping_close"
+        />
+
+        <Button
+                android:id="@+id/check_btn"
+                android:layout_width="24dp"
+                android:layout_height="20dp"
+                android:layout_margin="17dp"
+                android:background="@drawable/dynamic_cropping_check"
+                android:layout_alignParentEnd="true"
+        />
+
+        <SurfaceView
+                android:id="@+id/play_surface"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="17dp"
+        />
+
+        <TextView
+                android:id="@+id/time_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0:00.0"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="18dp"
+                android:layout_below="@id/play_surface"
+                android:textSize="12dp"
+        />
+
+        <TextView
+                android:id="@+id/total_time_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" | 0:00.0"
+                android:layout_marginTop="12dp"
+                android:layout_below="@id/play_surface"
+                android:layout_toEndOf="@id/time_view"
+                android:textSize="12dp"
+        />
+
+        <SeekBar
+                android:id="@+id/seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/time_view"
+                android:layout_marginTop="12dp"
+                style="@style/DynamicCroppingSeekbarStyle"
+                android:thumbTint="@color/white"
+        />
+
+        <com.example.templechen.videoshaderdemo.standalone.RenderRecordView
+                android:id="@+id/render_record_view"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="7dp"
+        />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/bottom_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+    >
+        <FrameLayout
+                android:id="@+id/record_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp">
+
+            <com.example.templechen.videoshaderdemo.standalone.SimpleGLSurfaceView
+                    android:id="@+id/record_surface"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+            />
+
+            <com.example.templechen.videoshaderdemo.standalone.SimpleEditorView
+                    android:id="@+id/editor_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+            />
+
+        </FrameLayout>
+
+        <TextView
+                android:id="@+id/hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hold to move the viewport."
+                android:layout_below="@id/record_view"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="9dp"
+        />
+
+        <Button
+                android:id="@+id/play_btn"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
+                android:layout_below="@id/hint"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/dynamic_cropping_play"
+                android:layout_marginTop="20dp"
+        />
+
+    </RelativeLayout>
+
+</LinearLayout>

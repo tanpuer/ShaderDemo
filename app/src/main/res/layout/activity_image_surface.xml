@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.example.templechen.videoshaderdemo.image.ImageSurfaceView
+            android:id="@+id/surface_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+    />
+
+    <SeekBar
+            android:id="@+id/seekbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+    />
+
+    <Button
+            android:id="@+id/offScreenBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:text="offScreen"
+            android:textAllCaps="false"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <com.example.templechen.videoshaderdemo.standalone.basiccropping.SimpleGLScalableSurfaceView
+            android:id="@+id/texture_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    <Button
+            android:id="@+id/rotate"
+            android:layout_width="28dp"
+            android:layout_height="32dp"
+            android:background="@drawable/basic_cropping_rotate"
+    />
+
+</RelativeLayout>

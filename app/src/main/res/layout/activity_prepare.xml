@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+>
+
+    <Button
+            android:id="@+id/RecordBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_centerHorizontal="true"
+            android:text="Record"
+    />
+
+    <Button
+            android:id="@+id/PlayingBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_below="@id/RecordBtn"
+            android:layout_centerHorizontal="true"
+            android:text="Play"
+    />
+
+    <Button
+            android:id="@+id/stickerBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_below="@id/PlayingBtn"
+            android:layout_centerHorizontal="true"
+            android:text="Sticker"
+    />
+
+    <Button
+            android:id="@+id/offScreenBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_below="@id/stickerBtn"
+            android:layout_centerHorizontal="true"
+            android:text="OffScreen"
+    />
+
+    <Button
+            android:id="@+id/nativeSurface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_below="@id/offScreenBtn"
+            android:layout_centerHorizontal="true"
+            android:text="nativeSurface"
+    />
+
+    <Button
+            android:id="@+id/gestureSurface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_below="@id/nativeSurface"
+            android:layout_centerHorizontal="true"
+            android:text="gestureSurface"
+
+    />
+
+    <Button
+            android:id="@+id/imageSurface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_below="@id/gestureSurface"
+            android:layout_centerHorizontal="true"
+            android:text="ImageSurface"
+    />
+
+    <Button
+            android:id="@+id/viewPager2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_below="@id/imageSurface"
+            android:layout_centerHorizontal="true"
+            android:text="fake view test"
+    />
+
+    <Button
+            android:id="@+id/SnapHelper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_below="@id/viewPager2"
+            android:layout_centerHorizontal="true"
+            android:text="SnapHelper"
+    />
+
+    <Button
+            android:id="@+id/album"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_below="@id/SnapHelper"
+            android:layout_centerHorizontal="true"
+            android:text="Album"
+            />
+
+    <Button
+            android:id="@+id/test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:layout_below="@id/album"
+            android:layout_centerHorizontal="true"
+            android:text="Test"
+            />
+
+</RelativeLayout>
