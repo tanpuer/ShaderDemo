@@ -2,6 +2,7 @@ package com.example.templechen.videoshaderdemo.album.filter
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.PointF
 import android.opengl.GLES30
 import android.opengl.Matrix
 import com.example.templechen.videoshaderdemo.GLUtils
@@ -9,6 +10,8 @@ import com.example.templechen.videoshaderdemo.R
 import com.example.templechen.videoshaderdemo.image.creator.BitmapCreatorFactory
 import com.example.templechen.videoshaderdemo.image.creator.IBitmapCreator
 import java.nio.FloatBuffer
+import kotlin.math.cos
+import kotlin.math.sin
 
 open class AlbumFilter {
 
@@ -99,7 +102,11 @@ open class AlbumFilter {
     }
 
     protected open fun initTexture() {
-        bitmapCreator = BitmapCreatorFactory.newImageCreator(this.resId, if (isGif) BitmapCreatorFactory.TYPE_GIF else BitmapCreatorFactory.TYPE_IMAGE, context)
+        bitmapCreator = BitmapCreatorFactory.newImageCreator(
+            this.resId,
+            if (isGif) BitmapCreatorFactory.TYPE_GIF else BitmapCreatorFactory.TYPE_IMAGE,
+            context
+        )
         bitmap = bitmapCreator!!.generateBitmap()
         textureId = if (bitmap != null) {
             bitmapWidth = bitmapCreator!!.getIntrinsicWidth()
@@ -108,13 +115,15 @@ open class AlbumFilter {
         } else {
             GLUtils.loadTexture(context, R.drawable.testjpg)
         }
-        updateMVPMatrix()
+        setVideoAndViewSize()
+        setScaleAndTransform()
     }
 
     open fun setViewSize(width: Int, height: Int) {
         viewWidth = width
         viewHeight = height
-        updateMVPMatrix()
+        setVideoAndViewSize()
+        setScaleAndTransform()
     }
 
     open fun drawFrame() {
@@ -122,7 +131,8 @@ open class AlbumFilter {
             if (textureId >= 0) {
                 GLES30.glDeleteTextures(1, intArrayOf(textureId), 0)
             }
-            bitmap = bitmapCreator!!.seekToFrameAndGet((currentIndex * 16.6667f * bitmapCreator!!.framesCount() / bitmapCreator!!.getDuration()).toInt())
+            bitmap =
+                bitmapCreator!!.seekToFrameAndGet((currentIndex * 16.6667f * bitmapCreator!!.framesCount() / bitmapCreator!!.getDuration()).toInt())
             bitmap?.let {
                 textureId = GLUtils.loadTexture(context, bitmap!!)
             }
@@ -186,36 +196,85 @@ open class AlbumFilter {
         currentIndex = 0
     }
 
+    private fun updateVertexCoord() {
+        val ratio = bitmapWidth * 1.0f / bitmapHeight
+        val radian = -degrees * Math.PI / 180
+        val vertexCoord =
+            mutableListOf(PointF(1.0f, 1.0f), PointF(-1f, 1f), PointF(-1f, -1f), PointF(1f, -1f))
+        vertexCoord.forEachIndexed { index, pointF ->
+            vertexCoord[index] = PointF(
+                (pointF.x) * cos(radian).toFloat() - (pointF.y / ratio) * sin(radian).toFloat(),
+                ((pointF.x) * sin(radian).toFloat() + (pointF.y / ratio) * cos(radian).toFloat()) * ratio
+            )
+        }
+        floatBuffer.clear()
+        floatBuffer = GLUtils.createBuffer(
+            floatArrayOf(
+                vertexCoord[0].x, vertexCoord[0].y, 1f, 1f,
+                vertexCoord[1].x, vertexCoord[1].y, 0f, 1f,
+                vertexCoord[2].x, vertexCoord[2].y, 0f, 0f,
+                vertexCoord[0].x, vertexCoord[0].y, 1f, 1f,
+                vertexCoord[2].x, vertexCoord[2].y, 0f, 0f,
+                vertexCoord[3].x, vertexCoord[3].y, 1f, 0f
+            )
+        )
+    }
+
+    //-------- scale scroll rotate -------
+
+    protected var scaleX = 1f
+    protected var scaleY = 1f
+    protected var scrollX = 0f
+    protected var scrollY = 0f
+    protected var degrees = 0f
     protected var originScaleX = 1f
     protected var originScaleY = 1f
-    private fun updateMVPMatrix() {
+
+    protected fun setScaleAndTransform() {
+        Matrix.setIdentityM(baseMVPMatrix, 0)
+        Matrix.scaleM(baseMVPMatrix, 0, scaleX * originScaleX, scaleY * originScaleY, 1.0f)
+        Matrix.translateM(
+            baseMVPMatrix,
+            0,
+            scrollX / (scaleX * originScaleX),
+            scrollY / (scaleY * originScaleY),
+            1.0f
+        )
+        updateVertexCoord()
+    }
+
+    private fun setOriginScale(originScaleX: Float, originScaleY: Float) {
+        this.originScaleX = originScaleX
+        this.originScaleY = originScaleY
+        setScaleAndTransform()
+    }
+
+    protected var fitCenter = true
+    private fun setVideoAndViewSize() {
         if (viewHeight > 0 && viewHeight > 0 && bitmapWidth > 0 && bitmapHeight > 0) {
-            Matrix.setIdentityM(baseMVPMatrix, 0)
-            val viewRatio = viewWidth * 1.0f / viewHeight
-            val bitmapRatio = bitmapWidth * 1.0f / bitmapHeight
-            if (false) {
-                //crop
-                if (viewRatio > bitmapRatio) {
-                    //scale y
-                    originScaleY = viewRatio / bitmapRatio
-                    Matrix.scaleM(baseMVPMatrix, 0, 1f, viewRatio / bitmapRatio, 1f)
+            //FitCenter
+            if (fitCenter) {
+                if (bitmapWidth * 1.0f / bitmapHeight > viewWidth * 1.0f / viewHeight) {
+                    //横屏视频
+                    originScaleY = viewWidth * 1.0f / bitmapWidth * bitmapHeight / viewHeight
+                    originScaleX = 1.0f
                 } else {
-                    //scale x
-                    originScaleX = bitmapRatio / viewRatio
-                    Matrix.scaleM(baseMVPMatrix, 0, bitmapRatio / viewRatio, 1f, 1f)
+                    //竖屏视频
+                    originScaleY = 1.0f
+                    originScaleX = viewHeight * 1.0f / bitmapHeight * bitmapWidth / viewWidth
                 }
             } else {
-                //center
-                if (viewRatio > bitmapRatio) {
-                    //scale x
-                    originScaleX = bitmapRatio / viewRatio
-                    Matrix.scaleM(baseMVPMatrix, 0, bitmapRatio / viewRatio, 1f, 1f)
+                if (bitmapWidth * 1.0f / bitmapHeight > viewWidth * 1.0f / viewHeight) {
+                    //横屏视频
+                    originScaleX = bitmapWidth * 1.0f / viewWidth * viewHeight / bitmapHeight
+                    originScaleY = 1.0f
                 } else {
-                    //scale y
-                    originScaleY = viewRatio / bitmapRatio
-                    Matrix.scaleM(baseMVPMatrix, 0, 1f, viewRatio / bitmapRatio, 1f)
+                    //竖屏视频
+                    originScaleX = 1.0f
+                    originScaleY = bitmapHeight * 1.0f / viewHeight * viewWidth / bitmapWidth
                 }
             }
+            setOriginScale(originScaleX, originScaleY)
         }
     }
 

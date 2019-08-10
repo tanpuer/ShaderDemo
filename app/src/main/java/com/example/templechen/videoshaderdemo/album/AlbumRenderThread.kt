@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.Surface
 import com.example.templechen.videoshaderdemo.R
 import com.example.templechen.videoshaderdemo.album.filter.*
+import com.example.templechen.videoshaderdemo.album.filter.douyin.DouyinCircleFilter
 import com.example.templechen.videoshaderdemo.gl.egl.EglCore
 import com.example.templechen.videoshaderdemo.gl.egl.WindowSurface
 
@@ -67,10 +68,11 @@ class AlbumRenderThread(val context: Context, val surface: Surface) : Thread() {
 
 //        filterList.add(AlbumFilter(context, R.drawable.test, true))
 //        filterList.add(AlbumTranslateFilter(context, R.drawable.testjpg3))
-        filterList.add(AlbumCircleFilter(context, R.drawable.testjpg))
+//        filterList.add(AlbumCircleFilter(context, R.drawable.testjpg))
 //        filterList.add(AlbumScaleFilter(context, R.drawable.testjpg2))
 //        filterList.add(AlbumCoverFilter(context, R.drawable.testjpg))
 //        filterList.add(AlbumCover2Filter(context, R.drawable.testjpg))
+        filterList.add(DouyinCircleFilter(context, R.drawable.testjpg2))
 
         filterList.forEach {
             filterTotalTimes += it.times
