@@ -65,11 +65,11 @@ class AlbumRenderThread(val context: Context, val surface: Surface) : Thread() {
         GLES30.glEnable(GLES30.GL_BLEND)
         GLES30.glBlendFunc(GLES30.GL_SRC_ALPHA, GLES30.GL_ONE_MINUS_SRC_ALPHA)
 
-        filterList.add(AlbumFilter(context, R.drawable.test, true))
-        filterList.add(AlbumTranslateFilter(context, R.drawable.testjpg3))
+//        filterList.add(AlbumFilter(context, R.drawable.test, true))
+//        filterList.add(AlbumTranslateFilter(context, R.drawable.testjpg3))
         filterList.add(AlbumCircleFilter(context, R.drawable.testjpg))
-        filterList.add(AlbumScaleFilter(context, R.drawable.testjpg2))
-        filterList.add(AlbumCoverFilter(context, R.drawable.testjpg))
+//        filterList.add(AlbumScaleFilter(context, R.drawable.testjpg2))
+//        filterList.add(AlbumCoverFilter(context, R.drawable.testjpg))
 //        filterList.add(AlbumCover2Filter(context, R.drawable.testjpg))
 
         filterList.forEach {

@@ -28,7 +28,7 @@ open class ImageCreator : IBitmapCreator {
     }
 
     override fun generateBitmap(): Bitmap? {
-        return null
+        return coverBitmap
     }
 
     override fun coverImage(): Bitmap {
@@ -40,10 +40,10 @@ open class ImageCreator : IBitmapCreator {
     }
 
     override fun getIntrinsicWidth(): Int {
-        return coverBitmap.height
+        return coverBitmap.width
     }
 
     override fun getIntrinsicHeight(): Int {
-        return coverBitmap.width
+        return coverBitmap.height
     }
 }

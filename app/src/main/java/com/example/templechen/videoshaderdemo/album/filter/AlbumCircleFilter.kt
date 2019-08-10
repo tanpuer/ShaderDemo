@@ -45,7 +45,7 @@ class AlbumCircleFilter : AlbumFilter {
         uRadiusLocation = GLES30.glGetUniformLocation(program,
             uRadius
         )
-        GLES30.glUniform1f(uRatioLocation, bitmapWidth * 1.0f / bitmapHeight)
+        GLES30.glUniform1f(uRatioLocation, bitmapWidth * 1.0f / bitmapHeight * originScaleY)
         GLES30.glUniform1f(uRadiusLocation, radius)
         super.drawFrame()
     }
