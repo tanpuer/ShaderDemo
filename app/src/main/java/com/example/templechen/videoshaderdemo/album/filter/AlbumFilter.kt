@@ -227,10 +227,6 @@ open class AlbumFilter {
         )
     }
 
-    fun getEndTime(): Int {
-        return startTime + times
-    }
-
     //-------- scale scroll rotate -------
 
     protected var scaleX = 1f
