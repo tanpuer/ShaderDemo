@@ -186,11 +186,18 @@ open class AlbumFilter {
             GLES30.glDeleteTextures(1, intArrayOf(textureId), 0)
             textureId = -1
         }
-        GLES30.glDeleteProgram(program)
-        program = 0
-        GLES30.glDeleteShader(vertexShader)
-        vertexShader = 0
-        GLES30.glDeleteShader(fragmentShader)
+        if (program >= 0) {
+            GLES30.glDeleteProgram(program)
+            program = -1
+        }
+        if (vertexShader >= 0) {
+            GLES30.glDeleteShader(vertexShader)
+            vertexShader = -1
+        }
+        if (fragmentShader >= 0) {
+            GLES30.glDeleteShader(fragmentShader)
+            fragmentShader = -1
+        }
         floatBuffer.clear()
         initedProgram = false
         currentIndex = 0
@@ -218,6 +225,10 @@ open class AlbumFilter {
                 vertexCoord[3].x, vertexCoord[3].y, 1f, 0f
             )
         )
+    }
+
+    fun getEndTime(): Int {
+        return startTime + times
     }
 
     //-------- scale scroll rotate -------
