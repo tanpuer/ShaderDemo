@@ -6,7 +6,7 @@ import com.example.templechen.videoshaderdemo.album.filter.douyin.config.Texture
 import java.lang.RuntimeException
 import kotlin.math.max
 
-class MutilTexturesFilter(context: Context, textureConfigs: Array<TextureConfig>) :
+class MultiTexturesFilter(context: Context, textureConfigs: Array<TextureConfig>) :
     AlbumFilter(context, textureConfigs[0].resId) {
 
     companion object {
