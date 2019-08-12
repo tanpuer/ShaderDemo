@@ -49,7 +49,11 @@ class DouyinCircleFilter : AlbumFilter {
             currentIndex++
             return
         }
-        val index = currentIndex - startTime
+        if (currentIndex > startTime + times + times / 2) {
+            currentIndex++
+            return
+        }
+        val index = currentIndex - startTime + trimStart
         radius += 0.002f
         scrollY = (1f - index * 2f / times) * 1.5f
         scrollX = scrollY

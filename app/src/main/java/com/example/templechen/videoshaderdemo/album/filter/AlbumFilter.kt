@@ -27,6 +27,8 @@ open class AlbumFilter {
     //default times, about 4s
     var times = 240
     var startTime = 0
+    var trimStart = 0
+    var trimEnd = 0
     var initedProgram = false
     private var resId = -1
 

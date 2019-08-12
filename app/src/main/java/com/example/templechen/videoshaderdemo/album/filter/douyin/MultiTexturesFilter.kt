@@ -10,7 +10,7 @@ class MultiTexturesFilter(context: Context, textureConfigs: Array<TextureConfig>
     AlbumFilter(context, textureConfigs[0].resId) {
 
     companion object {
-        private const val TEXTURE_MAX_SIZE = 3
+        private const val TEXTURE_MAX_SIZE = 8
     }
 
     private val filterList = mutableListOf<AlbumFilter>()
@@ -24,6 +24,8 @@ class MultiTexturesFilter(context: Context, textureConfigs: Array<TextureConfig>
             val albumFilter = DouyinCircleFilter(context, textureConfig.resId)
             albumFilter.times = textureConfig.duration
             albumFilter.startTime = textureConfig.startTime
+            albumFilter.trimStart = textureConfig.trimStart
+            albumFilter.trimEnd = textureConfig.trimEnd
             albumFilter.textureIndex = index
             filterList.add(albumFilter)
             times = max(times, textureConfig.startTime + textureConfig.duration)
