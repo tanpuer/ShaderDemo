@@ -82,7 +82,7 @@ class AlbumRenderThread(val context: Context, val surface: Surface) : Thread() {
         val textureConfig5 = TextureConfig(R.drawable.testjpg2, 480, 240)
         val textureConfig6 = TextureConfig(R.drawable.testjpg, 600, 240)
         val textureConfig7 = TextureConfig(R.drawable.testjpg2, 720, 240)
-        filterList.add(MultiTexturesFilter(context, arrayOf(textureConfig1, textureConfig2, textureConfig3, textureConfig4, textureConfig5, textureConfig6, textureConfig7  )))
+        filterList.add(MultiTexturesFilter(context, arrayOf(textureConfig1, textureConfig2, textureConfig3, textureConfig4, textureConfig5, textureConfig6, textureConfig7)))
 
         filterList.forEach {
             filterTotalTimes += it.times

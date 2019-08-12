@@ -11,6 +11,8 @@ import android.view.WindowManager
 import android.widget.Toast
 import com.example.templechen.videoshaderdemo.R
 import com.example.templechen.videoshaderdemo.album.filter.*
+import com.example.templechen.videoshaderdemo.album.filter.douyin.MultiTexturesFilter
+import com.example.templechen.videoshaderdemo.album.filter.douyin.config.TextureConfig
 import com.example.templechen.videoshaderdemo.gl.egl.EglCore
 import com.example.templechen.videoshaderdemo.gl.egl.OffscreenSurface
 import com.example.templechen.videoshaderdemo.gl.egl.WindowSurface
@@ -78,12 +80,22 @@ class AlbumOffScreenRenderThread(val context: Context) : Thread() {
         GLES30.glEnable(GLES30.GL_BLEND)
         GLES30.glBlendFunc(GLES30.GL_SRC_ALPHA, GLES30.GL_ONE_MINUS_SRC_ALPHA)
 
-        filterList.add(AlbumFilter(context, R.drawable.test, true))
-        filterList.add(AlbumTranslateFilter(context, R.drawable.testjpg3))
-        filterList.add(AlbumCircleFilter(context, R.drawable.testjpg))
-        filterList.add(AlbumScaleFilter(context, R.drawable.testjpg2))
-        filterList.add(AlbumCoverFilter(context, R.drawable.testjpg))
+//        filterList.add(AlbumFilter(context, R.drawable.test, true))
+//        filterList.add(AlbumTranslateFilter(context, R.drawable.testjpg3))
+//        filterList.add(AlbumCircleFilter(context, R.drawable.testjpg))
+//        filterList.add(AlbumScaleFilter(context, R.drawable.testjpg2))
+//        filterList.add(AlbumCoverFilter(context, R.drawable.testjpg))
 //        filterList.add(AlbumCover2Filter(context, R.drawable.testjpg))
+
+        val textureConfig1 = TextureConfig(R.drawable.testjpg2, 0, 240, 120)
+        val textureConfig2 = TextureConfig(R.drawable.testjpg, 120, 240)
+        val textureConfig3 = TextureConfig(R.drawable.testjpg2, 240, 240)
+        val textureConfig4 = TextureConfig(R.drawable.testjpg, 360, 240)
+        val textureConfig5 = TextureConfig(R.drawable.testjpg2, 480, 240)
+        val textureConfig6 = TextureConfig(R.drawable.testjpg, 600, 240)
+        val textureConfig7 = TextureConfig(R.drawable.testjpg2, 720, 240)
+        filterList.add(MultiTexturesFilter(context, arrayOf(textureConfig1, textureConfig2, textureConfig3, textureConfig4, textureConfig5, textureConfig6, textureConfig7)))
+
 
         filterList.forEach {
             filterTotalTimes += it.times
