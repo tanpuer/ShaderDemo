@@ -8,6 +8,8 @@ import android.view.Surface
 import com.example.templechen.videoshaderdemo.R
 import com.example.templechen.videoshaderdemo.album.filter.*
 import com.example.templechen.videoshaderdemo.album.filter.douyin.DouyinCircleFilter
+import com.example.templechen.videoshaderdemo.album.filter.douyin.MutilTexturesFilter
+import com.example.templechen.videoshaderdemo.album.filter.douyin.config.TextureConfig
 import com.example.templechen.videoshaderdemo.gl.egl.EglCore
 import com.example.templechen.videoshaderdemo.gl.egl.WindowSurface
 
@@ -72,7 +74,12 @@ class AlbumRenderThread(val context: Context, val surface: Surface) : Thread() {
 //        filterList.add(AlbumScaleFilter(context, R.drawable.testjpg2))
 //        filterList.add(AlbumCoverFilter(context, R.drawable.testjpg))
 //        filterList.add(AlbumCover2Filter(context, R.drawable.testjpg))
-        filterList.add(DouyinCircleFilter(context, R.drawable.testjpg2))
+//        filterList.add(DouyinCircleFilter(context, R.drawable.testjpg2))
+
+        val textureConfig1 = TextureConfig(R.drawable.testjpg2, 120, 240)
+        val textureConfig2 = TextureConfig(R.drawable.testjpg, 0, 240)
+        val textureConfig3 = TextureConfig(R.drawable.testjpg, 240, 240)
+        filterList.add(MutilTexturesFilter(context, arrayOf(textureConfig2, textureConfig1, textureConfig3)))
 
         filterList.forEach {
             filterTotalTimes += it.times

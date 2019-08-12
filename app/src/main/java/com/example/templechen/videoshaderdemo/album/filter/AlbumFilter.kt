@@ -26,6 +26,7 @@ open class AlbumFilter {
 
     //default times, about 4s
     var times = 240
+    var startTime = 0
     var initedProgram = false
     private var resId = -1
 
@@ -59,6 +60,9 @@ open class AlbumFilter {
     protected val refreshRate = 60
     protected var currentIndex = 0
 
+    //texture index
+    var textureIndex = 0
+
     constructor(context: Context) {
         this.context = context
         Matrix.setIdentityM(baseMVPMatrix, 0)
@@ -89,7 +93,7 @@ open class AlbumFilter {
         initedProgram = true
     }
 
-    protected open fun initProgram() {
+    open fun initProgram() {
         vertexShader = GLUtils.loadShader(
             GLES30.GL_VERTEX_SHADER,
             GLUtils.readShaderFromResource(context, R.raw.album_vertex_shader)
@@ -101,7 +105,7 @@ open class AlbumFilter {
         program = GLUtils.createProgram(vertexShader, fragmentShader)
     }
 
-    protected open fun initTexture() {
+    open fun initTexture() {
         bitmapCreator = BitmapCreatorFactory.newImageCreator(
             this.resId,
             if (isGif) BitmapCreatorFactory.TYPE_GIF else BitmapCreatorFactory.TYPE_IMAGE,
@@ -146,10 +150,10 @@ open class AlbumFilter {
         uTextureSamplerLocation = GLES30.glGetUniformLocation(program, uTextureSampler)
         uMVPMatrixLocation = GLES30.glGetUniformLocation(program, uMVPMatrix)
 
-        GLES30.glActiveTexture(GLES30.GL_TEXTURE0)
+        GLES30.glActiveTexture(GLES30.GL_TEXTURE0 + textureIndex)
         GLES30.glBindTexture(GLES30.GL_TEXTURE_2D, textureId)
 
-        GLES30.glUniform1i(uTextureSamplerLocation, 0)
+        GLES30.glUniform1i(uTextureSamplerLocation, 0 + textureIndex)
         GLES30.glUniformMatrix4fv(uTextureMatrixLocation, 1, false, transformMatrix, 0)
         GLES30.glUniformMatrix4fv(uMVPMatrixLocation, 1, false, baseMVPMatrix, 0)
 
