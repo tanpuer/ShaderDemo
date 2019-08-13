@@ -132,13 +132,17 @@ open class AlbumFilter {
         setScaleAndTransform()
     }
 
+    open fun getRealIndex(): Int {
+        return currentIndex
+    }
+
     open fun drawFrame() {
         if (isGif) {
             if (textureId >= 0) {
                 GLES30.glDeleteTextures(1, intArrayOf(textureId), 0)
             }
             bitmap =
-                bitmapCreator!!.seekToFrameAndGet((currentIndex * 16.6667f * bitmapCreator!!.framesCount() / bitmapCreator!!.getDuration()).toInt())
+                bitmapCreator!!.seekToFrameAndGet((getRealIndex() * 16.6667f * bitmapCreator!!.framesCount() / bitmapCreator!!.getDuration()).toInt())
             bitmap?.let {
                 textureId = GLUtils.loadTexture(context, bitmap!!)
             }

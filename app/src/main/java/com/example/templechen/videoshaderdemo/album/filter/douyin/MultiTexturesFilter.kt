@@ -1,6 +1,7 @@
 package com.example.templechen.videoshaderdemo.album.filter.douyin
 
 import android.content.Context
+import com.example.templechen.videoshaderdemo.R
 import com.example.templechen.videoshaderdemo.album.filter.AlbumFilter
 import com.example.templechen.videoshaderdemo.album.filter.douyin.config.TextureConfig
 import java.lang.RuntimeException
@@ -22,6 +23,7 @@ class MultiTexturesFilter(context: Context, textureConfigs: Array<TextureConfig>
         times = 0
         textureConfigs.forEachIndexed { index, textureConfig ->
             val albumFilter = DouyinCircleFilter(context, textureConfig.resId)
+//            val albumFilter = DouyinCircleFilter(context, R.drawable.test, true)
             albumFilter.times = textureConfig.duration
             albumFilter.startTime = textureConfig.startTime
             albumFilter.trimStart = textureConfig.trimStart

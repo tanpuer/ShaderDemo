@@ -74,6 +74,10 @@ class DouyinCircleFilter : AlbumFilter {
         }
     }
 
+    override fun getRealIndex(): Int {
+        return currentIndex - startTime + trimStart
+    }
+
     override fun drawFrame() {
         if (currentIndex < startTime) {
             currentIndex++
@@ -85,7 +89,7 @@ class DouyinCircleFilter : AlbumFilter {
             return
         }
 
-        val index = currentIndex - startTime + trimStart
+        val index = getRealIndex()
         if (mode == TOP_RIGHT) {
             scrollY = (1f - index * 2f / times) * 1.5f
             scrollX = scrollY
