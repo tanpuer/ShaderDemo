@@ -21,6 +21,7 @@ import com.example.templechen.videoshaderdemo.multiple.FakeSurfaceActivity
 import com.example.templechen.videoshaderdemo.offscreen.OffScreenActivity
 import com.example.templechen.videoshaderdemo.snaphelper.SnapHelperActivity
 import com.example.templechen.videoshaderdemo.test.RecyclerViewTouchTestActivity
+import com.example.templechen.videoshaderdemo.widget.coordinator.CoordinatorActivity
 import kotlinx.android.synthetic.main.activity_prepare.*
 
 class PrepareActivity : AppCompatActivity(), View.OnClickListener {
@@ -122,7 +123,7 @@ class PrepareActivity : AppCompatActivity(), View.OnClickListener {
                 startActivity(intent)
             }
             R.id.test -> {
-                val intent = Intent(this, RecyclerViewTouchTestActivity::class.java)
+                val intent = Intent(this, CoordinatorActivity::class.java)
                 startActivity(intent)
             }
         }
